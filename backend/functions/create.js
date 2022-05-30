@@ -2,8 +2,6 @@ import * as uuid from "uuid";
 import handler from "../util/handler";
 import dynamoDB from "../util/dynamodb";
 
-const dynamoDB = new DynamoDB.DocumentClient();
-
 export const main = handler(async (event) => {
   const data = JSON.parse(event.body);
 
