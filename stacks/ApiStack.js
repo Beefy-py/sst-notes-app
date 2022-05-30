@@ -6,6 +6,7 @@ export function ApiStack({ stack, app }) {
   const api = new Api(stack, "Api", {
     //We are creating an API using SST’s Api construct.
     defaults: {
+      authorizer: "iam",
       function: {
         permissions: [table], //We are giving our API permission to access our DynamoDB table
         environment: {
