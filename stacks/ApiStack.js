@@ -11,6 +11,7 @@ export function ApiStack({ stack, app }) {
         permissions: [table], //We are giving our API permission to access our DynamoDB table
         environment: {
           TABLE_NAME: table.tableName, //We’ll need this to query our table.
+          STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
         },
       },
     },
@@ -20,6 +21,7 @@ export function ApiStack({ stack, app }) {
       "GET /notes": "functions/list.main",
       "PUT /notes/{id}": "functions/update.main",
       "DELETE /notes/{id}": "functions/delete.main",
+      "POST /billing": "functions/billing.main",
     },
   });
 
