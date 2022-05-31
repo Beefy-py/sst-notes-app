@@ -16,5 +16,11 @@ export const main = handler(async (event) => {
     currency: "usd",
   });
 
-  return { status: true };
+  return {
+    status: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true,
+    },
+  };
 });
