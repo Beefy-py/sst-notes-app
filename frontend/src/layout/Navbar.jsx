@@ -47,7 +47,8 @@ const Navbar = () => {
           </div>
           <button
             type="button"
-            className="text-gray-800 hover:bg-blue-700 transition focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={() => nav("/settings")}
+            className="text-gray-800 hover:bg-blue-700 hover:text-white border-2 border-gray-800 transition  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
           >
             Buy Notes
           </button>
@@ -101,19 +102,6 @@ const Navbar = () => {
                 }
               >
                 Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  isActive
-                    ? linkStyles +
-                      " text-blue-700 underline underline-offset-2 decoration-2"
-                    : linkStyles
-                }
-              >
-                About
               </NavLink>
             </li>
             <li>

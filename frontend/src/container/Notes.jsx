@@ -37,28 +37,47 @@ const Notes = () => {
     return notes.map(({ content, noteId, createdAt }) => (
       <Link
         to={"/notes/" + noteId}
-        className="block p-4 shadow rouned"
+        className="block p-4 border-2 border-gray-200 rounded-lg mb-5"
         key={noteId}
       >
-        <h3>{content.trim().split("\n")[0]}</h3>
-        <span>{new Date(createdAt).toLocaleString()}</span>
+        <h3 className="font-semibold text-gray-800">
+          {content.trim().split("\n")[0]}
+        </h3>
+        <span className="font-italic text-gray-700 border-t block border-gray-300 pt-1 mt-3">
+          {new Date(createdAt).toLocaleString()}
+        </span>
       </Link>
     ));
   }
 
   return (
-    <div className="">
+    <div className="w-5/6 mx-auto">
       {userAuthenticated ? (
         <div className="notes">
           <Link
             to="/notes/new"
             type="button"
-            className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium  focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
           >
-            CreateNote
+            <div className="flex items-center text-gray-600">
+              <span className="mr-2">CreateNote </span>
+              <svg
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                <path
+                  fillRule="evenodd"
+                  d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
           </Link>
 
-          <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
+          <h2 className="pb-3 mt-4 mb-3 border-bottom font-bold">Your Notes</h2>
           <div className="px-2 my-4">
             {!loading ? (
               renderNotesList(notes)
