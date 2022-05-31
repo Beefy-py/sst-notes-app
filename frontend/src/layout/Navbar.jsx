@@ -1,27 +1,49 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAppContext } from "../lib/contextLib";
+import { Auth } from "aws-amplify";
 
 const Navbar = () => {
+  const { userAuthenticated, setUserAuthenticated } = useAppContext();
+  const nav = useNavigate();
   const linkStyles =
     "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700";
+
+  const handleLogout = () => {
+    Auth.signOut();
+    setUserAuthenticated(false);
+    nav("/login");
+  };
 
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <div className="flex md:order-2">
+        <div className="flex md:order-2 items-center">
           <div className="text-sm mr-4 font-semibold">
-            <Link
-              to="/signup"
-              className="block py-2 pr-4 pl-3 text-gray-700 border-b-2 border-gray-300 pb-10 hover:bg-gray-50 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-            >
-              SignUp
-            </Link>
-            <Link
-              to="/login"
-              className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-            >
-              Login
-            </Link>
+            {!userAuthenticated ? (
+              <>
+                <Link
+                  to="/signup"
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b-2 border-gray-300 pb-10 hover:bg-gray-50 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  SignUp
+                </Link>
+                <Link
+                  to="/login"
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Login
+                </Link>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="block py-2 font-semibold pr-4 pl-3 text-red-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              >
+                Logout
+              </button>
+            )}
           </div>
           <button
             type="button"
@@ -105,6 +127,19 @@ const Navbar = () => {
                 }
               >
                 Notes
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/settings"
+                className={({ isActive }) =>
+                  isActive
+                    ? linkStyles +
+                      " text-blue-700 underline underline-offset-2 decoration-2"
+                    : linkStyles
+                }
+              >
+                Settings
               </NavLink>
             </li>
           </ul>
