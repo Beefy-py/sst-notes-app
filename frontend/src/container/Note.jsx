@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { API, Storage } from "aws-amplify";
+import { API, Auth, Storage } from "aws-amplify";
 import { onError } from "../lib/errorLib";
 import { config } from "../config";
 import LoaderButton from "./../common/LoaderButton";
@@ -16,8 +16,14 @@ export default function Note() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    function loadNote() {
-      return API.get("notes", `/notes/${id}`);
+    async function loadNote() {
+      return API.get("notes", `/notes/${id}`, {
+        headers: {
+          Authorization: `Bearer ${(await Auth.currentSession())
+            .getAccessToken()
+            .getJwtToken()}`,
+        },
+      });
     }
 
     async function onLoad() {
@@ -47,9 +53,15 @@ export default function Note() {
     file.current = event.target.files[0];
   }
 
-  function saveNote(note) {
+  async function saveNote(note) {
     return API.put("notes", `/notes/${id}`, {
       body: note,
+
+      headers: {
+        Authorization: `Bearer ${(await Auth.currentSession())
+          .getAccessToken()
+          .getJwtToken()}`,
+      },
     });
   }
 
@@ -85,8 +97,14 @@ export default function Note() {
     }
   }
 
-  function deleteNote() {
-    return API.del("notes", `/notes/${id}`);
+  async function deleteNote() {
+    return API.del("notes", `/notes/${id}`, {
+      headers: {
+        Authorization: `Bearer ${(await Auth.currentSession())
+          .getAccessToken()
+          .getJwtToken()}`,
+      },
+    });
   }
 
   async function handleDelete(event) {

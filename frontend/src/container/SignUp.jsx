@@ -72,6 +72,7 @@ export default function Signup() {
             placeholder="0000"
             required=""
             onChange={handleFieldChange}
+            value={fields.confirmationCode}
           />
         </div>
 
@@ -98,6 +99,7 @@ export default function Signup() {
             placeholder="name@flowbite.com"
             required=""
             onChange={handleFieldChange}
+            value={fields.email}
           />
         </div>
         <div className="mb-6">
@@ -114,6 +116,7 @@ export default function Signup() {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required=""
             onChange={handleFieldChange}
+            value={fields.password}
           />
         </div>{" "}
         <div className="mb-6">
@@ -130,6 +133,7 @@ export default function Signup() {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required=""
             onChange={handleFieldChange}
+            value={fields.password}
           />
         </div>
         <LoaderButton text="SignUp" isLoading={loading} />

@@ -1,6 +1,5 @@
 import { StorageStack } from "./StorageStack";
-import { ApiStack } from "./ApiStack";
-import { AuthStack } from "./AuthStack";
+import { AuthApiStack } from "./AuthApiStack";
 import { FrontendStack } from "./FrontendStack";
 
 export default function main(app) {
@@ -11,5 +10,10 @@ export default function main(app) {
       format: "esm",
     },
   });
-  app.stack(StorageStack).stack(ApiStack).stack(AuthStack).stack(FrontendStack);
+
+  if (app.stage === "dev") {
+    app.setDefaultRemovalPolicy("destroy");
+  }
+
+  app.stack(StorageStack).stack(AuthApiStack).stack(FrontendStack);
 }

@@ -12,7 +12,7 @@ export function StorageStack({ stack, app }) {
     ],
   });
 
-  const table = new Table(stack, "UserNotes", {
+  const table = new Table(stack, "Notes", {
     fields: {
       userId: "string",
       noteId: "string",

@@ -7,7 +7,7 @@ export const main = handler(async (event) => {
   const params = {
     TableName: process.env.TABLE_NAME,
     Key: {
-      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
+      userId:event.requestContext.authorizer.jwt.claims.sub, //event.requestContext.authorizer.iam.cognitoIdentity.identityId
       noteId: event.pathParameters.id,
     },
     UpdateExpression: "SET content=:content, attachment=:attachment",

@@ -6,13 +6,10 @@ export const main = handler(async (event) => {
     TableName: process.env.TABLE_NAME,
     KeyConditionExpression: "userId = :userId",
     ExpressionAttributeValues: {
-      ":userId": event.requestContext.authorizer.iam.cognitoIdentity.identityId,
+      ":userId": event.requestContext.authorizer.jwt.claims.sub,
     },
   };
-
   const result = await dynamoDB.query(params);
-
-  console.log(result);
 
   return result.Items;
 });

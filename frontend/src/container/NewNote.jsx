@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import LoaderButton from "../common/LoaderButton";
 import { onError } from "../lib/errorLib";
 import { config } from "../config";
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import { s3Upload } from "../lib/awsLib";
 
 export default function NewNote() {
@@ -41,9 +41,14 @@ export default function NewNote() {
     }
   }
 
-  function createNote(note) {
+  async function createNote(note) {
     return API.post("notes", "/notes", {
       body: note,
+      headers: {
+        Authorization: `Bearer ${(await Auth.currentSession())
+          .getAccessToken()
+          .getJwtToken()}`,
+      },
     });
   }
 

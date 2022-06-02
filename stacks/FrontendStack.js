@@ -1,11 +1,9 @@
 import { ReactStaticSite, use } from "@serverless-stack/resources";
-import { AuthStack } from "./AuthStack";
-import { ApiStack } from "./ApiStack";
+import { AuthApiStack } from "./AuthApiStack";
 import { StorageStack } from "./StorageStack";
 
 export function FrontendStack({ stack, app }) {
-  const { api } = use(ApiStack);
-  const { auth } = use(AuthStack);
+  const { auth, api, domain } = use(AuthApiStack);
   const { bucket } = use(StorageStack);
 
   const site = new ReactStaticSite(stack, "ReactSite", {
@@ -17,6 +15,8 @@ export function FrontendStack({ stack, app }) {
       REACT_APP_USER_POOL_ID: auth.userPoolId,
       REACT_APP_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId,
       REACT_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
+      REACT_APP_API_STAGE: app.stage,
+      REACT_APP_COGNITO_DOMAIN: domain.domainName,
     },
   });
 

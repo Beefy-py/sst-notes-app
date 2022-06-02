@@ -8,7 +8,7 @@ export const main = handler(async (event) => {
   const params = {
     TableName: process.env.TABLE_NAME,
     Item: {
-      userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
+      userId: event.requestContext.authorizer.jwt.claims.sub,
       noteId: uuid.v1(),
       content: data.content,
       attachment: data.attachment,

@@ -4,7 +4,7 @@ import { useAppContext } from "../lib/contextLib";
 import { Auth } from "aws-amplify";
 
 const Navbar = () => {
-  const { userAuthenticated, setUserAuthenticated } = useAppContext();
+  const { userAuthenticated, setUserAuthenticated, userInfo } = useAppContext();
   const nav = useNavigate();
   const linkStyles =
     "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700";
@@ -14,6 +14,8 @@ const Navbar = () => {
     setUserAuthenticated(false);
     nav("/login");
   };
+
+  console.log(userInfo);
 
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
@@ -47,8 +49,8 @@ const Navbar = () => {
           </div>
           <button
             type="button"
-            onClick={() => nav("/settings")}
-            className="text-gray-800 hover:bg-blue-700 hover:text-white border-2 border-gray-800 transition  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
+            onClick={() => nav("/buy-notes")}
+            className="text-gray-800 hover:bg-purple-700 hover:text-white border-2 border-gray-800 transition  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
           >
             Buy Notes
           </button>

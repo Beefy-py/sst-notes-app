@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAppContext } from "../lib/contextLib";
 import { onError } from "../lib/errorLib";
 import { Link, useNavigate } from "react-router-dom";
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
@@ -29,8 +29,14 @@ const Notes = () => {
     onLoad();
   }, [userAuthenticated]);
 
-  function loadNotes() {
-    return API.get("notes", "/notes");
+  async function loadNotes() {
+    return API.get("notes", "/notes", {
+      headers: {
+        Authorization: `Bearer ${(await Auth.currentSession())
+          .getAccessToken()
+          .getJwtToken()}`,
+      },
+    });
   }
 
   function renderNotesList(notes) {

@@ -12,13 +12,16 @@ import NewNote from "./container/NewNote";
 import Notes from "./container/Notes";
 import Note from "./container/Note";
 import Settings from "./container/Settings";
+import BuyNotes from "./container/BuyNotes";
 
 const App = () => {
   const [userAuthenticated, setUserAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     onLoad();
+    getUser();
   }, []);
 
   async function onLoad() {
@@ -33,10 +36,17 @@ const App = () => {
     setIsAuthenticating(false);
   }
 
+  const getUser = async () => {
+    const user = await Auth.currentUserInfo();
+    if (user) setUserInfo(user.attributes);
+  };
+
   return (
     <div className="my-20 mx-auto w-2/4">
       {" "}
-      <AppContext.Provider value={{ userAuthenticated, setUserAuthenticated }}>
+      <AppContext.Provider
+        value={{ userInfo, userAuthenticated, setUserAuthenticated }}
+      >
         <Navbar />
 
         {!isAuthenticating ? (
@@ -48,6 +58,7 @@ const App = () => {
             <Route path="/notes/new" element={<NewNote />} />
             <Route path="/notes/:id" element={<Note />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/buy-notes" element={<BuyNotes />} />
             <Route path="*" element={<NotFound />} />;
           </Routes>
         ) : (

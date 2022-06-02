@@ -29,6 +29,12 @@ const Login = () => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    await Auth.federatedSignIn({
+      provider: "Google",
+    });
+  };
+
   return (
     <form onSubmit={handleSubmit} className="w-3/4 mx-auto my-8">
       <div className="mb-6">
@@ -66,6 +72,9 @@ const Login = () => {
       </div>
 
       <LoaderButton text="LogIn" isLoading={loading} />
+      <button onClick={handleGoogleSignIn} className="ml-2">
+        Google
+      </button>
     </form>
   );
 };
