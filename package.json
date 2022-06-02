@@ -21,8 +21,7 @@
     "backend"
   ],
   "dependencies": {
-    "@aws-cdk/aws-apigatewayv2-alpha": "2.24.0-alpha.0",
-    "aws-cdk-lib": "2.24.0",
+    "aws-cdk": "^2.26.0",
     "aws-sdk": "^2.1145.0",
     "serverless-stack": "^0.1.0",
     "uuid": "^8.3.2"
