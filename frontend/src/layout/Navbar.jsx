@@ -50,7 +50,7 @@ const Navbar = () => {
           <button
             type="button"
             onClick={() => nav("/buy-notes")}
-            className="text-gray-800 hover:bg-purple-700 hover:text-white border-2 border-gray-800 transition  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
+            className="text-gray-800 hover:bg-purple-700 hover:text-white border-2 shadow-md transition  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
           >
             Buy Notes
           </button>
