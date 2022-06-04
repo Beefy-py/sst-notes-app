@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import LoaderButton from "../common/LoaderButton";
 import { useFormFields } from "../lib/hooksLib";
 
 export default function BillingForm({ loading, onSubmit, method }) {
