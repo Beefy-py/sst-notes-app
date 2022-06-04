@@ -24,6 +24,14 @@ export default function BuyNotes() {
     });
   }
   async function handleFormSubmit(storage, { token, error }) {
+    if (paymentMethod === "mope") {
+      await billUser({
+        storage,
+        method: "mope",
+      });
+
+      return;
+    }
     if (error) {
       onError(error);
       return;
@@ -47,7 +55,7 @@ export default function BuyNotes() {
 
   return (
     <div className="w-4/5 mx-auto">
-      <div className="mt-2 mb-6 border-2 border-gray-400 rounded-lg p-5">
+      <div className="mt-2 mb-6 border-2 border-gray-400 rounded-lg p-5 bg-gray-100">
         <p className="text-gray-700 inline-block">Payment method:</p>
         <ul className="ml-4  inline-flex text-sm text-center text-gray-500 dark:text-gray-400">
           <li className="mr-2">

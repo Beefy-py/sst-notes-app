@@ -3,7 +3,10 @@ import handler from "../util/handler";
 import calculateCost from "../util/cost";
 
 export const main = handler(async (event) => {
-  const { storage, source } = JSON.parse(event.body);
+  const { storage, source, method } = JSON.parse(event.body);
+
+  console.log(method);
+
   const amount = calculateCost(storage);
   const description = "Scrath Charge";
 

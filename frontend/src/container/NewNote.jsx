@@ -52,8 +52,6 @@ export default function NewNote() {
     });
   }
 
-  console.log(file.current);
-
   return (
     <div className="NewNote">
       <form onSubmit={handleSubmit}>
