@@ -5,6 +5,8 @@ import { useAppContext } from "../lib/contextLib";
 import { useFormFields } from "../lib/hooksLib";
 import { onError } from "../lib/errorLib";
 import { Auth } from "aws-amplify";
+import Google from "./../icons/google";
+import Facebook from "./../icons/facebook";
 
 export default function Signup() {
   const [fields, handleFieldChange] = useFormFields({
@@ -53,6 +55,11 @@ export default function Signup() {
       setLoading(false);
     }
   }
+  const handleGoogleSignIn = async () => {
+    await Auth.federatedSignIn({
+      provider: "Google",
+    });
+  };
 
   function renderConfirmationForm() {
     return (
@@ -75,8 +82,7 @@ export default function Signup() {
             value={fields.confirmationCode}
           />
         </div>
-
-        <LoaderButton text="Submit" isLoading={loading} />
+        <LoaderButton text="Submit" isLoading={loading} />{" "}
       </form>
     );
   }
@@ -136,7 +142,19 @@ export default function Signup() {
             value={fields.password}
           />
         </div>
-        <LoaderButton text="SignUp" isLoading={loading} />
+        <div className="flex item-center">
+          <LoaderButton text="SignUp" isLoading={loading} />
+          <button onClick={handleGoogleSignIn} className="ml-2" type="button">
+            <Google />
+          </button>{" "}
+          <button
+            onClick={() => console.log("Facebook Signin")}
+            className="ml-3"
+            type="button"
+          >
+            <Facebook />
+          </button>
+        </div>
       </form>
     );
   }

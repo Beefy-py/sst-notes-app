@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import LoaderButton from "./../common/LoaderButton";
 import { onError } from "./../lib/errorLib";
 import { useFormFields } from "./../lib/hooksLib";
+import Google from "./../icons/google";
+import Facebook from "./../icons/facebook";
 
 const Login = () => {
   const { setUserAuthenticated } = useAppContext();
@@ -71,10 +73,19 @@ const Login = () => {
         />
       </div>
 
-      <LoaderButton text="LogIn" isLoading={loading} />
-      <button onClick={handleGoogleSignIn} className="ml-2">
-        Google
-      </button>
+      <div className="flex item-center">
+        <LoaderButton text="LogIn" isLoading={loading} />
+        <button onClick={handleGoogleSignIn} className="ml-2" type="button">
+          <Google />
+        </button>
+        <button
+          onClick={() => console.log("Facebook Signin")}
+          className="ml-3"
+          type="button"
+        >
+          <Facebook />
+        </button>
+      </div>
     </form>
   );
 };
