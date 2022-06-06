@@ -11,7 +11,7 @@ export default function main(app) {
     },
   });
 
-  if (app.stage === "dev") {
+  if (app.stage !== "prod") {
     app.setDefaultRemovalPolicy("destroy");
   }
 
