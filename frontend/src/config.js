@@ -22,11 +22,11 @@ export const config = {
       SCOPE: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
       REDIRECT_SIGNIN:
         process.env.REACT_APP_API_STAGE === "prod"
-          ? "production-url"
+          ? "https://dfwwlqfwiq3c2.cloudfront.net/"
           : "http://localhost:3000",
       REDIRECT_SIGNOUT:
         process.env.REACT_APP_API_STAGE === "prod"
-          ? "production-url"
+          ? "https://dfwwlqfwiq3c2.cloudfront.net/"
           : "http://localhost:3000",
     },
   },
