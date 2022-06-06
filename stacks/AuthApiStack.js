@@ -19,12 +19,12 @@ export function AuthApiStack({ stack, app }) {
         oAuth: {
           callbackUrls: [
             app.stage === "prod"
-              ? "prodDomainNameUrl"
+              ? "https://dfwwlqfwiq3c2.cloudfront.net/"
               : "http://localhost:3000",
           ],
           logoutUrls: [
             app.stage === "prod"
-              ? "prodDomainNameUrl"
+              ? "https://dfwwlqfwiq3c2.cloudfront.net/"
               : "http://localhost:3000",
           ],
         },
